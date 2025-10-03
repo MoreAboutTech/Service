@@ -1,0 +1,282 @@
+/* Reset dan font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+}
+
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.8);
+}
+
+header {
+    background: #005f73;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.logo { 
+  width: 350px;        /* Lebar logo */
+  height: auto;        /* Biar proporsional */
+  display: block;      /* Supaya mudah diatur */
+  margin: 0 auto 0px; /* Pusatkan & beri jarak ke bawah */
+}
+
+
+header h1 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: white;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.intro h2 {
+    font-size: 2rem;
+    color: #0a9396;
+    margin-bottom: 15px;
+}
+
+.intro p {
+    font-size: 1.15rem;
+    color: whitesmoke;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Layanan dan Keunggulan */
+.services {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.07);
+    padding: 25px 20px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.12);
+}
+
+.service-card img {
+    width: 70px;
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: #005f73;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.service-card p {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Testimoni */
+
+.testimonial { display: none; text-align: center; }
+.testimonial.active { display: block; animation: fade 1s; }
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.testimonial-section {
+    background: #94d2bd;
+    padding: 40px 20px;
+    margin-top: 70px;
+    border-radius: 15px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.testimonial-section h2 {
+    text-align: center;
+    color: #05668d;
+    margin-bottom: 30px;
+}
+
+.testimonial {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    max-width: 700px;
+    margin: 0 auto;
+    font-style: italic;
+    color: #222;
+    position: relative;
+}
+
+.testimonial::before {
+    content: "“";
+    font-size: 3rem;
+    color: #0a9396;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
+.testimonial p {
+    margin-bottom: 15px;
+}
+
+.testimonial .author {
+    text-align: right;
+    font-weight: 700;
+    color: #05668d;
+}
+
+/* === FORM PEMESANAN === */
+
+.order-form {
+  margin-top: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.order-form input[type="text"],
+.order-form input[type="tel"],
+.order-form select,
+.order-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.order-form button[type="submit"],
+#downloadBtn {
+  background-color: #0a9396;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+.order-form button[type="submit"]:hover,
+#downloadBtn:hover {
+  background-color: #086d71;
+}
+
+#formNotif {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 10px;
+    background: #005f73;
+    color: white;
+    margin-top: 70px;
+    font-size: 0.9rem;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: white; /* atau pakai 'inherit' agar sama dengan warna default */
+}
+
+/* Tombol Call-to-Action */
+.btn-contact {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 32px;
+    background-color: #0a9396;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-contact:hover {
+    background-color: #05668d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .services {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 90%;
+    }
+}

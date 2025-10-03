@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teknisi Keliling Profesional</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <video autoplay muted loop id="bg-video">
+        <source src="sky blue.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <img src="Logo Tekkel nobg .png" alt="Logo Teknisi" class="logo" />
+    <h1>Teknisi Keliling Profesional</h1>
+    <p>Solusi cepat dan terpercaya untuk perbaikan perangkat elektronik Anda</p>
+  </header>
+
+  <div class="container">
+
+    <!-- SECTION: INTRO -->
+    <section class="intro">
+      <h2>Kenapa Memilih Kami?</h2>
+      <p>
+        Kami menyediakan layanan teknisi keliling dengan tenaga ahli yang berpengalaman, cepat tanggap, dan harga yang transparan. Dengan dukungan peralatan lengkap dan layanan ramah, kami siap membantu Anda kapan saja dan di mana saja.
+      </p>
+      <a href="tel:+62895389736608" class="btn-contact">Hubungi Kami Sekarang</a>
+    </section>
+
+    <!-- SECTION: SERVICES -->
+    <section class="services" aria-label="Layanan Kami">
+      <div class="service-card">
+        <img src="toolbox.png" alt="Perbaikan Elektronik" />
+        <h3>Perbaikan Elektronik</h3>
+        <p>Mengatasi berbagai masalah pada perangkat elektronik di rumah atau kantor Anda dengan cepat dan profesional.</p>
+      </div>
+
+      <div class="service-card">
+        <img src="smartphone.png" alt="Servis Smartphone" />
+        <h3>Servis Smartphone</h3>
+        <p>Memperbaiki smartphone dengan garansi dan menggunakan suku cadang berkualitas untuk hasil terbaik.</p>
+      </div>
+
+      <div class="service-card">
+        <img src="clock.png" alt="Layanan 24/7" />
+        <h3>Layanan 24/7</h3>
+        <p>Kami siap melayani Anda kapan pun, dengan layanan darurat dan support penuh di hari libur sekalipun.</p>
+      </div>
+    </section>
+
+    <!-- SECTION: TESTIMONIAL -->
+    <section class="testimonial-section" aria-label="Testimoni Pelanggan">
+      <h2>Apa Kata Pelanggan Kami?</h2>
+
+      <div class="testimonial active">
+        <p>"Teknisi sangat profesional dan cepat datang ke rumah saya. Masalah smartphone saya langsung selesai. Harga juga sangat terjangkau!"</p>
+        <div class="author">- Hanif, Solo</div>
+      </div>
+
+      <div class="testimonial">
+        <p>"Pelayanan sangat memuaskan, teknisinya ramah dan cepat. Terima kasih!"</p>
+        <div class="author">- Falah, Bekasi</div>
+      </div>
+
+      <div class="testimonial">
+        <p>"Harga transparan dan tidak mengada-ada. Recommended banget!"</p>
+        <div class="author">- Nizar, Ciamis</div>
+      </div>
+
+      <div class="testimonial">
+        <p>"Servisnya detail. Bisa ditunggu dan prosesnya cepat"</p>
+        <div class="author">- Vio, Cinere</div>
+      </div>
+     </section>
+
+    <!-- SECTION: ORDER FORM -->
+    <section class="order-form">
+      <h2>Form Pemesanan Servis</h2>
+      <form id="serviceForm">
+        <label>Nama:<br>
+          <input type="text" name="name" required minlength="3">
+        </label><br><br>
+
+        <label>No Telepon:<br>
+          <input type="tel" name="phone" required pattern="\d{10,15}">
+        </label><br><br>
+
+        <label>Alamat:<br>
+          <input type="text" name="address" required>
+        </label><br><br>
+
+        <label>Jenis Servis:<br>
+          <select name="service">
+            <option value="Elektronik">Perbaikan Elektronik</option>
+            <option value="Smartphone">Servis Smartphone</option>
+            <option value="Laptop">Servis Laptop</option>
+            <option value="Installasi">Installasi</option>
+            <option value="Solusi">Solusi</option>
+          </select>
+        </label><br><br>
+
+        <label>Pesan Tambahan:<br>
+          <textarea name="message" rows="4" required minlength="10"></textarea>
+        </label><br><br>
+
+        <button type="submit">Kirim Pesanan</button>
+      </form>
+      <p id="formNotif"></p>
+    </section>
+  </div>
+
+ <footer>
+  &copy; 2024 Teknisi Keliling Profesional |
+  Hubungi: +62 895-389736-608 |
+  Instagram:
+  <a href="https://instagram.com/asix_electro" target="_blank">asix_electro</a>
+ </footer>
+
+  <!-- SCRIPT: Google Apps Script Integration -->
+  <script>
+    const gs_url = "https://script.google.com/macros/s/AKfycbwrI0OwpNdV4JgHuf0fPFdSjNqLPENSvww-KSZl2n6Mhhnw1tRyTyvY0Wh98vmmcyL5/exec";
+    const adminWa = "62895389736608";
+
+    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fd = new FormData(this);
+
+      const data = {
+        name: fd.get('name'),
+        phone: fd.get('phone'),
+        address: fd.get('address'),
+        service: fd.get('service'),
+        message: fd.get('message')
+      };
+
+      document.getElementById('formNotif').innerText = 'Mengirim...';
+
+      fetch(gs_url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+      })
+      .then(r => r.text())
+      .then(r => {
+        document.getElementById('formNotif').innerText = 'Pesanan terkirim! Mengalihkan ke WhatsApp...';
+
+        const pesan =
+          `Halo Admin, ada pesanan baru:%0a` +
+          `Nama: ${data.name}%0a` +
+          `Telepon: ${data.phone}%0a` +
+          `Alamat: ${data.address}%0a` +
+          `Servis: ${data.service}%0a` +
+          `Pesan: ${data.message}`;
+
+        window.location.href = `https://wa.me/${adminWa}?text=${pesan}`;
+        document.getElementById('serviceForm').reset();
+      });
+      });
+    </script>
+
+  <!-- SCRIPT: Testimonial Slider -->
+  <script>
+    let idx = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+
+    function showNext() {
+      testimonials[idx].classList.remove('active');
+      idx = (idx + 1) % testimonials.length;
+      testimonials[idx].classList.add('active');
+    }
+
+    setInterval(showNext, 5000);
+  </script>
+  <script src="script.js"></script>
+
+</body>
+</html>
