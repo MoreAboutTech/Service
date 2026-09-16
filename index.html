@@ -1,0 +1,2919 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tekkel Teknisi Keliling | Solusi Teknologi Profesional</title>
+
+    <meta
+        name="description"
+        content="Tekkel Teknisi Keliling menyediakan layanan perbaikan elektronik, smartphone, laptop, jaringan, CCTV, instalasi dan solusi teknologi profesional."
+    >
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: #050b18;
+            color: #f4f8ff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           BACKGROUND SYSTEM
+        ========================================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 174, 255, 0.15),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(64, 90, 255, 0.14),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(0, 229, 255, 0.10),
+                    transparent 35%
+                ),
+                #040914;
+        }
+
+        #bg-video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.22;
+            filter: saturate(1.2) contrast(1.1);
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(2, 8, 20, 0.45),
+                    rgba(3, 9, 22, 0.82)
+                );
+        }
+
+        /* Animated grid */
+
+        .grid-background {
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 200, 255, 0.055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(0, 200, 255, 0.055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 70px 70px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+            animation: gridMove 18s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(70px);
+            }
+        }
+
+
+        /* Moving glow */
+
+        .glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+
+            filter: blur(90px);
+            opacity: 0.16;
+
+            animation: floatGlow 12s ease-in-out infinite;
+        }
+
+        .glow.one {
+            background: #00bfff;
+            left: -180px;
+            top: 10%;
+        }
+
+        .glow.two {
+            background: #4f46e5;
+            right: -180px;
+            top: 35%;
+            animation-delay: -4s;
+        }
+
+        .glow.three {
+            background: #00e5ff;
+            left: 35%;
+            bottom: -300px;
+            animation-delay: -7s;
+        }
+
+        @keyframes floatGlow {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(70px, -50px) scale(1.12);
+            }
+        }
+
+
+        /* Particles */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px rgba(0, 200, 255, 0.8);
+
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            from {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            85% {
+                opacity: 0.8;
+            }
+
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            z-index: 1000;
+
+            padding: 15px 5%;
+
+            transition: 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(4, 10, 24, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-inner {
+            max-width: 1250px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+
+            filter:
+                drop-shadow(0 0 12px rgba(0, 200, 255, 0.35));
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .brand-sub {
+            color: #91a5c4;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #c8d5e8;
+            font-size: 14px;
+            font-weight: 600;
+
+            position: relative;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+
+            width: 0;
+            height: 2px;
+
+            left: 50%;
+            bottom: -7px;
+
+            background: #00c8ff;
+
+            transform: translateX(-50%);
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 70%;
+        }
+
+        .nav-button {
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b7ff,
+                    #1677ff
+                );
+
+            color: white !important;
+
+            box-shadow:
+                0 8px 25px rgba(0, 160, 255, 0.22);
+        }
+
+        .nav-button::after {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+
+            border: 0;
+            background: transparent;
+            color: white;
+
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            max-width: 1250px;
+            margin: auto;
+
+            padding:
+                150px 5%
+                90px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border:
+                1px solid rgba(0, 201, 255, 0.25);
+
+            border-radius: 999px;
+
+            background:
+                rgba(0, 179, 255, 0.08);
+
+            color: #9deaff;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 24px;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            background: #38e8a3;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 12px #38e8a3;
+
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 0.6;
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(44px, 6vw, 78px);
+            line-height: 1.05;
+
+            letter-spacing: -2.5px;
+
+            font-weight: 850;
+
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            display: block;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #72ddff,
+                    #4c8dff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 700px;
+
+            color: #b9c7da;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 52px;
+
+            padding: 0 24px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: 750;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #00bfff,
+                    #146bff
+                );
+
+            box-shadow:
+                0 12px 35px rgba(0, 157, 255, 0.28);
+        }
+
+        .btn-primary:hover {
+            box-shadow:
+                0 18px 45px rgba(0, 157, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background:
+                rgba(255, 255, 255, 0.055);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            color: #ffffff;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 45px;
+
+            margin-top: 55px;
+
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            min-width: 110px;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 30px;
+            line-height: 1.2;
+
+            font-weight: 850;
+        }
+
+        .stat span {
+            color: #8ea2bf;
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           GENERAL SECTION
+        ========================================================= */
+
+        section {
+            position: relative;
+        }
+
+        .section {
+            max-width: 1250px;
+            margin: auto;
+
+            padding:
+                100px 5%;
+        }
+
+        .section-heading {
+            max-width: 750px;
+
+            margin-bottom: 50px;
+        }
+
+        .eyebrow {
+            color: #55d9ff;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(32px, 4vw, 48px);
+
+            line-height: 1.15;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: #9eafc6;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.075),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+
+            backdrop-filter: blur(15px);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            right: -100px;
+            top: -100px;
+
+            background: #00bfff;
+
+            filter: blur(90px);
+
+            opacity: 0.08;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            border-color:
+                rgba(0, 196, 255, 0.3);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                rgba(0, 191, 255, 0.1);
+
+            border:
+                1px solid rgba(0, 191, 255, 0.15);
+
+            font-size: 28px;
+
+            margin-bottom: 22px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #98a9c0;
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================================
+           SERVICES
+        ========================================================= */
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .service {
+            min-height: 230px;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            transition: 0.3s ease;
+        }
+
+        .service:hover {
+            transform: translateY(-7px);
+
+            background:
+                rgba(0, 184, 255, 0.07);
+
+            border-color:
+                rgba(0, 184, 255, 0.2);
+        }
+
+        .service img {
+            width: 55px;
+            height: 55px;
+
+            object-fit: contain;
+
+            margin-bottom: 18px;
+
+            filter:
+                drop-shadow(
+                    0 0 14px
+                    rgba(0, 200, 255, 0.3)
+                );
+        }
+
+        .service h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .service p {
+            color: #97a9c1;
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           PROCESS
+        ========================================================= */
+
+        .process {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .step {
+            position: relative;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .step-number {
+            font-size: 14px;
+            font-weight: 800;
+
+            color: #50d9ff;
+
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #93a5bd;
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           TESTIMONIAL
+        ========================================================= */
+
+        .testimonial-box {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 45px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.07),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+
+            text-align: center;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .testimonial {
+            display: none;
+            animation: testimonialIn 0.5s ease;
+        }
+
+        .testimonial.active {
+            display: block;
+        }
+
+        @keyframes testimonialIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .testimonial p {
+            font-size: 21px;
+
+            line-height: 1.7;
+
+            color: #e4edf8;
+
+            margin-bottom: 20px;
+        }
+
+        .author {
+            color: #58d9ff;
+
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 28px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #44536a;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .dot.active {
+            width: 24px;
+            border-radius: 10px;
+
+            background: #36cfff;
+        }
+
+
+        /* =========================================================
+           ORDER FORM
+        ========================================================= */
+
+        .order-wrapper {
+            display: grid;
+
+            grid-template-columns:
+                0.8fr 1.2fr;
+
+            gap: 30px;
+
+            align-items: stretch;
+        }
+
+        .order-info {
+            padding: 40px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(0, 185, 255, 0.1),
+                    rgba(255, 255, 255, 0.035)
+                );
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .order-info h2 {
+            font-size: 34px;
+            line-height: 1.2;
+
+            margin-bottom: 15px;
+        }
+
+        .order-info p {
+            color: #a5b5ca;
+
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+
+            margin-bottom: 17px;
+
+            color: #c9d6e8;
+
+            font-size: 14px;
+        }
+
+        .form-container {
+            padding: 35px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.09);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #d8e3f1;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.11);
+
+            background:
+                rgba(3, 10, 23, 0.75);
+
+            color: #ffffff;
+
+            outline: none;
+
+            transition: 0.25s ease;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #19c9ff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0, 190, 255, 0.08);
+        }
+
+        .form-group select option {
+            background: #081224;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+
+            border: 0;
+
+            cursor: pointer;
+        }
+
+        #formNotif {
+            margin-top: 15px;
+
+            text-align: center;
+
+            color: #65ddff;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            max-width: 1100px;
+            margin: 40px auto 100px;
+
+            padding: 60px 30px;
+
+            text-align: center;
+
+            border-radius: 28px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0, 194, 255, 0.16),
+                    rgba(255, 255, 255, 0.035)
+                );
+
+            border:
+                1px solid rgba(0, 194, 255, 0.15);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 4vw, 45px);
+
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #a2b2c8;
+
+            max-width: 650px;
+
+            margin:
+                0 auto
+                28px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 40px 5%;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.07);
+
+            text-align: center;
+
+            color: #778aa4;
+
+            font-size: 13px;
+
+            background:
+                rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: #56d9ff;
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           WHATSAPP FLOAT
+        ========================================================= */
+
+        .whatsapp {
+            position: fixed;
+
+            right: 24px;
+            bottom: 24px;
+
+            z-index: 999;
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #19c76b;
+
+            color: white;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.35);
+
+            transition: 0.3s ease;
+        }
+
+        .whatsapp:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+
+        /* =========================================================
+           BACK TO TOP
+        ========================================================= */
+
+        .back-top {
+            position: fixed;
+
+            right: 25px;
+            bottom: 95px;
+
+            width: 42px;
+            height: 42px;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 10px;
+
+            background:
+                rgba(5, 13, 29, 0.85);
+
+            color: white;
+
+            cursor: pointer;
+
+            z-index: 999;
+        }
+
+        .back-top.show {
+            display: flex;
+        }
+
+
+        /* =========================================================
+           SCROLL ANIMATION
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: 75px;
+                left: 5%;
+                right: 5%;
+
+                display: none;
+
+                flex-direction: column;
+
+                padding: 25px;
+
+                border-radius: 18px;
+
+                background:
+                    rgba(5, 12, 27, 0.96);
+
+                border:
+                    1px solid rgba(255, 255, 255, 0.1);
+
+                backdrop-filter: blur(20px);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .cards,
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .order-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            .hero {
+                padding-top: 140px;
+                padding-bottom: 70px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .hero-stats {
+                gap: 25px;
+            }
+
+            .cards,
+            .services-grid,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding-top: 75px;
+                padding-bottom: 75px;
+            }
+
+            .testimonial-box {
+                padding: 30px 22px;
+            }
+
+            .testimonial p {
+                font-size: 17px;
+            }
+
+            .order-info,
+            .form-container {
+                padding: 25px;
+            }
+
+            .cta {
+                margin:
+                    20px 5% 70px;
+            }
+
+            .brand-sub {
+                display: none;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================= -->
+
+    <div class="background">
+
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            id="bg-video"
+        >
+            <source src="sky blue.mp4" type="video/mp4">
+        </video>
+
+        <div class="video-overlay"></div>
+
+        <div class="grid-background"></div>
+
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+        <div class="glow three"></div>
+
+        <div class="particles" id="particles"></div>
+
+    </div>
+
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
+
+    <nav class="navbar" id="navbar">
+
+        <div class="nav-inner">
+
+            <a href="#home" class="brand">
+
+                <img
+                    src="Logo Tekkel nobg .png"
+                    alt="Logo Tekkel"
+                >
+
+                <div class="brand-text">
+                    <span class="brand-name">
+                        Tekkel Teknisi
+                    </span>
+
+                    <span class="brand-sub">
+                        Teknisi Keliling Profesional
+                    </span>
+                </div>
+
+            </a>
+
+
+            <div class="nav-links" id="navLinks">
+
+                <a href="#home">
+                    Beranda
+                </a>
+
+                <a href="#layanan">
+                    Layanan
+                </a>
+
+                <a href="#proses">
+                    Cara Kerja
+                </a>
+
+                <a href="#testimoni">
+                    Testimoni
+                </a>
+
+                <a href="#pesan" class="nav-button">
+                    Pesan Teknisi
+                </a>
+
+            </div>
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Buka menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content reveal">
+
+                <div class="badge">
+
+                    <span class="status-dot"></span>
+
+                    Teknisi Siap Membantu
+
+                </div>
+
+
+                <h1>
+
+                    Solusi Teknologi
+                    <span>Datang ke Tempat Anda.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Tekkel Teknisi Keliling hadir untuk membantu
+                    kebutuhan perbaikan dan instalasi teknologi
+                    dengan pelayanan profesional, cepat,
+                    transparan, dan terpercaya.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#pesan"
+                        class="btn btn-primary"
+                    >
+                        Pesan Teknisi
+                    </a>
+
+                    <a
+                        href="https://wa.me/62895389736608"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-secondary"
+                    >
+                        Hubungi WhatsApp
+                    </a>
+
+                </div>
+
+
+                <div class="hero-stats">
+
+                    <div class="stat">
+
+                        <strong
+                            class="counter"
+                            data-target="500"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Pelanggan
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <strong
+                            class="counter"
+                            data-target="1000"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Perbaikan
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <strong
+                            class="counter"
+                            data-target="24"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Jam Layanan
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WHY US
+        ====================================================== -->
+
+        <section class="section" id="keunggulan">
+
+            <div class="section-heading reveal">
+
+                <div class="eyebrow">
+                    Kenapa Tekkel?
+                </div>
+
+                <h2>
+                    Bukan hanya memperbaiki,
+                    tetapi memberikan solusi.
+                </h2>
+
+                <p>
+                    Kami mengutamakan kualitas pekerjaan,
+                    komunikasi yang jelas, serta pengalaman
+                    pelanggan yang nyaman dari awal hingga selesai.
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card reveal">
+
+                    <div class="card-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Respon Cepat
+                    </h3>
+
+                    <p>
+                        Tim siap menerima permintaan servis
+                        dan membantu menentukan solusi yang
+                        sesuai dengan kebutuhan Anda.
+                    </p>
+
+                </div>
+
+
+                <div class="card reveal">
+
+                    <div class="card-icon">
+                        🛠️
+                    </div>
+
+                    <h3>
+                        Teknisi Profesional
+                    </h3>
+
+                    <p>
+                        Pekerjaan dilakukan menggunakan
+                        peralatan yang sesuai dan pendekatan
+                        troubleshooting yang sistematis.
+                    </p>
+
+                </div>
+
+
+                <div class="card reveal">
+
+                    <div class="card-icon">
+                        💎
+                    </div>
+
+                    <h3>
+                        Harga Transparan
+                    </h3>
+
+                    <p>
+                        Estimasi pekerjaan dijelaskan terlebih
+                        dahulu agar pelanggan memahami layanan
+                        yang akan dikerjakan.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SERVICES
+        ====================================================== -->
+
+        <section class="section" id="layanan">
+
+            <div class="section-heading reveal">
+
+                <div class="eyebrow">
+                    Layanan
+                </div>
+
+                <h2>
+                    Satu teknisi untuk berbagai
+                    kebutuhan teknologi.
+                </h2>
+
+                <p>
+                    Pilih layanan yang Anda perlukan.
+                    Jika belum yakin masalahnya apa,
+                    Anda juga dapat berkonsultasi terlebih dahulu.
+                </p>
+
+            </div>
+
+
+            <div class="services-grid">
+
+                <div class="service reveal">
+
+                    <img
+                        src="toolbox.png"
+                        alt="Perbaikan Elektronik"
+                    >
+
+                    <h3>
+                        Perbaikan Elektronik
+                    </h3>
+
+                    <p>
+                        Pemeriksaan dan perbaikan berbagai
+                        perangkat elektronik rumah maupun kantor.
+                    </p>
+
+                </div>
+
+
+                <div class="service reveal">
+
+                    <img
+                        src="smartphone.png"
+                        alt="Servis Smartphone"
+                    >
+
+                    <h3>
+                        Servis Smartphone
+                    </h3>
+
+                    <p>
+                        Membantu menangani berbagai kendala
+                        perangkat smartphone dan troubleshooting.
+                    </p>
+
+                </div>
+
+
+                <div class="service reveal">
+
+                    <div class="card-icon">
+                        💻
+                    </div>
+
+                    <h3>
+                        Laptop & PC
+                    </h3>
+
+                    <p>
+                        Instalasi sistem, troubleshooting,
+                        maintenance, upgrade dan optimasi komputer.
+                    </p>
+
+                </div>
+
+
+                <div class="service reveal">
+
+                    <div class="card-icon">
+                        🌐
+                    </div>
+
+                    <h3>
+                        Jaringan & Internet
+                    </h3>
+
+                    <p>
+                        Instalasi jaringan, konfigurasi router,
+                        Wi-Fi, kabel LAN dan troubleshooting koneksi.
+                    </p>
+
+                </div>
+
+
+                <div class="service reveal">
+
+                    <div class="card-icon">
+                        📹
+                    </div>
+
+                    <h3>
+                        CCTV & Monitoring
+                    </h3>
+
+                    <p>
+                        Instalasi, konfigurasi dan troubleshooting
+                        sistem CCTV untuk rumah maupun kantor.
+                    </p>
+
+                </div>
+
+
+                <div class="service reveal">
+
+                    <div class="card-icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        Konsultasi Teknologi
+                    </h3>
+
+                    <p>
+                        Membantu menentukan solusi teknologi
+                        yang sesuai dengan kebutuhan dan anggaran.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROCESS
+        ====================================================== -->
+
+        <section class="section" id="proses">
+
+            <div class="section-heading reveal">
+
+                <div class="eyebrow">
+                    Cara Kerja
+                </div>
+
+                <h2>
+                    Mudah, jelas, dan praktis.
+                </h2>
+
+                <p>
+                    Tidak perlu bingung menjelaskan masalah
+                    teknis secara rumit. Kami membantu dari
+                    tahap konsultasi hingga pekerjaan selesai.
+                </p>
+
+            </div>
+
+
+            <div class="process">
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Hubungi Kami
+                    </h3>
+
+                    <p>
+                        Ceritakan masalah perangkat atau
+                        kebutuhan instalasi Anda.
+                    </p>
+
+                </div>
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Analisa
+                    </h3>
+
+                    <p>
+                        Teknisi membantu memahami masalah
+                        dan menentukan tindakan yang diperlukan.
+                    </p>
+
+                </div>
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Pengerjaan
+                    </h3>
+
+                    <p>
+                        Teknisi melakukan pekerjaan menggunakan
+                        peralatan yang sesuai.
+                    </p>
+
+                </div>
+
+
+                <div class="step reveal">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Selesai
+                    </h3>
+
+                    <p>
+                        Perangkat atau sistem diperiksa kembali
+                        sebelum pekerjaan dinyatakan selesai.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TESTIMONIAL
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="testimoni"
+        >
+
+            <div class="section-heading reveal">
+
+                <div class="eyebrow">
+                    Testimoni
+                </div>
+
+                <h2>
+                    Pengalaman pelanggan
+                    bersama Tekkel.
+                </h2>
+
+            </div>
+
+
+            <div class="testimonial-box reveal">
+
+                <div class="testimonial active">
+
+                    <p>
+                        Teknisi sangat profesional dan cepat
+                        datang ke rumah saya. Masalah smartphone
+                        saya langsung selesai.
+                    </p>
+
+                    <div class="author">
+                        Hanif — Solo
+                    </div>
+
+                </div>
+
+
+                <div class="testimonial">
+
+                    <p>
+                        Pelayanan sangat memuaskan.
+                        Teknisi ramah dan proses pengerjaan
+                        berjalan dengan cepat.
+                    </p>
+
+                    <div class="author">
+                        Falah — Bekasi
+                    </div>
+
+                </div>
+
+
+                <div class="testimonial">
+
+                    <p>
+                        Harga dijelaskan dengan jelas dan
+                        pelayanan cukup responsif.
+                    </p>
+
+                    <div class="author">
+                        Nizar — Ciamis
+                    </div>
+
+                </div>
+
+
+                <div class="testimonial">
+
+                    <p>
+                        Servisnya detail dan prosesnya cepat.
+                        Bisa ditunggu sesuai kondisi pekerjaan.
+                    </p>
+
+                    <div class="author">
+                        Vio — Cinere
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="testimonial-controls"
+                    id="testimonialControls"
+                >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ORDER
+        ====================================================== -->
+
+        <section
+            class="section"
+            id="pesan"
+        >
+
+            <div class="order-wrapper">
+
+                <div class="order-info reveal">
+
+                    <div class="eyebrow">
+                        Pesan Teknisi
+                    </div>
+
+                    <h2>
+                        Ada masalah dengan
+                        perangkat Anda?
+                    </h2>
+
+                    <p>
+                        Isi form di samping dan ceritakan
+                        kebutuhan Anda. Data pesanan akan
+                        diteruskan kepada admin untuk diproses.
+                    </p>
+
+
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>
+                            +62 895-389736-608
+                        </span>
+                    </div>
+
+
+                    <div class="contact-item">
+                        <span>💬</span>
+                        <span>
+                            Konsultasi melalui WhatsApp
+                        </span>
+                    </div>
+
+
+                    <div class="contact-item">
+                        <span>🕐</span>
+                        <span>
+                            Layanan teknisi setiap hari
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="form-container reveal">
+
+                    <form id="serviceForm">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Nama
+                            </label>
+
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                placeholder="Masukkan nama Anda"
+                                required
+                                minlength="3"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                No. Telepon
+                            </label>
+
+                            <input
+                                id="phone"
+                                type="tel"
+                                name="phone"
+                                placeholder="Contoh: 0895389736608"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="address">
+                                Alamat
+                            </label>
+
+                            <input
+                                id="address"
+                                type="text"
+                                name="address"
+                                placeholder="Alamat lokasi servis"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="service">
+                                Jenis Servis
+                            </label>
+
+                            <select
+                                id="service"
+                                name="service"
+                                required
+                            >
+
+                                <option value="Elektronik">
+                                    Perbaikan Elektronik
+                                </option>
+
+                                <option value="Smartphone">
+                                    Servis Smartphone
+                                </option>
+
+                                <option value="Laptop">
+                                    Servis Laptop & PC
+                                </option>
+
+                                <option value="Jaringan">
+                                    Jaringan & Internet
+                                </option>
+
+                                <option value="CCTV">
+                                    CCTV
+                                </option>
+
+                                <option value="Installasi">
+                                    Installasi
+                                </option>
+
+                                <option value="Solusi">
+                                    Konsultasi / Solusi
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="message">
+                                Jelaskan Masalah
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                placeholder="Contoh: laptop tidak menyala setelah terkena listrik..."
+                                required
+                                minlength="10"
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary submit-btn"
+                            id="submitButton"
+                        >
+                            Kirim Pesanan
+                        </button>
+
+                    </form>
+
+
+                    <p id="formNotif"></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CTA
+        ====================================================== -->
+
+        <section class="cta reveal">
+
+            <h2>
+                Butuh bantuan teknisi?
+            </h2>
+
+            <p>
+                Jangan biarkan masalah perangkat mengganggu
+                aktivitas Anda. Hubungi Tekkel dan konsultasikan
+                kebutuhan Anda sekarang.
+            </p>
+
+            <a
+                href="https://wa.me/62895389736608"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+            >
+                Chat WhatsApp
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <p>
+            © <span id="year"></span>
+            Tekkel Teknisi Keliling.
+            Semua hak dilindungi.
+        </p>
+
+        <p style="margin-top: 8px;">
+
+            Instagram:
+            <a
+                href="https://instagram.com/asix_electro"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                @asix_electro
+            </a>
+
+        </p>
+
+    </footer>
+
+
+    <!-- =========================================================
+         WHATSAPP
+    ========================================================== -->
+
+    <a
+        class="whatsapp"
+        href="https://wa.me/62895389736608"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Hubungi Tekkel melalui WhatsApp"
+    >
+        💬
+    </a>
+
+
+    <!-- =========================================================
+         BACK TO TOP
+    ========================================================== -->
+
+    <button
+        class="back-top"
+        id="backTop"
+        aria-label="Kembali ke atas"
+    >
+        ↑
+    </button>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =====================================================
+           CONFIGURATION
+        ====================================================== */
+
+        const GS_URL =
+            "https://script.google.com/macros/s/AKfycbwrI0OwpNdV4JgHuf0fPFdSjNqLPENSvww-KSZl2n6Mhhnw1tRyTyvY0Wh98vmmcyL5/exec";
+
+        const ADMIN_WA =
+            "62895389736608";
+
+
+        /* =====================================================
+           YEAR
+        ====================================================== */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        /* =====================================================
+           PARTICLES
+        ====================================================== */
+
+        const particles =
+            document.getElementById("particles");
+
+        const particleCount =
+            window.innerWidth < 600 ? 25 : 45;
+
+        for (
+            let i = 0;
+            i < particleCount;
+            i++
+        ) {
+
+            const particle =
+                document.createElement("span");
+
+            particle.className =
+                "particle";
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+            particle.style.animationDuration =
+                (8 + Math.random() * 14) + "s";
+
+            particle.style.animationDelay =
+                (-Math.random() * 15) + "s";
+
+            particle.style.opacity =
+                0.2 + Math.random() * 0.7;
+
+            particles.appendChild(particle);
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        const navbar =
+            document.getElementById("navbar");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        menuToggle.addEventListener(
+            "click",
+            () => {
+
+                navLinks.classList.toggle("open");
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navLinks.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (window.scrollY > 40) {
+
+                    navbar.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    navbar.classList.remove(
+                        "scrolled"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+        const revealObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            element => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           COUNTER
+        ====================================================== */
+
+        const counters =
+            document.querySelectorAll(
+                ".counter"
+            );
+
+        const counterObserver =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        const counter =
+                            entry.target;
+
+                        const target =
+                            Number(
+                                counter.dataset.target
+                            );
+
+                        let current = 0;
+
+                        const increment =
+                            Math.max(
+                                1,
+                                Math.ceil(
+                                    target / 70
+                                )
+                            );
+
+                        const update =
+                            () => {
+
+                                current +=
+                                    increment;
+
+                                if (
+                                    current >=
+                                    target
+                                ) {
+
+                                    current =
+                                        target;
+
+                                    counter.textContent =
+                                        target +
+                                        (target >= 1000
+                                            ? "+"
+                                            : "+");
+
+                                    return;
+                                }
+
+                                counter.textContent =
+                                    current;
+
+                                requestAnimationFrame(
+                                    update
+                                );
+
+                            };
+
+                        update();
+
+                        counterObserver.unobserve(
+                            counter
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: 0.7
+                }
+            );
+
+
+        counters.forEach(
+            counter => {
+
+                counterObserver.observe(
+                    counter
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           TESTIMONIAL SLIDER
+        ====================================================== */
+
+        const testimonials =
+            document.querySelectorAll(
+                ".testimonial"
+            );
+
+        const testimonialControls =
+            document.getElementById(
+                "testimonialControls"
+            );
+
+        let testimonialIndex = 0;
+
+
+        testimonials.forEach(
+            (_, index) => {
+
+                const dot =
+                    document.createElement(
+                        "button"
+                    );
+
+                dot.className =
+                    "dot";
+
+                dot.setAttribute(
+                    "aria-label",
+                    "Testimoni " +
+                    (index + 1)
+                );
+
+                if (index === 0) {
+
+                    dot.classList.add(
+                        "active"
+                    );
+
+                }
+
+                dot.addEventListener(
+                    "click",
+                    () => {
+
+                        showTestimonial(
+                            index
+                        );
+
+                    }
+                );
+
+                testimonialControls.appendChild(
+                    dot
+                );
+
+            }
+        );
+
+
+        const dots =
+            document.querySelectorAll(
+                ".dot"
+            );
+
+
+        function showTestimonial(index) {
+
+            testimonials.forEach(
+                testimonial => {
+
+                    testimonial.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            dots.forEach(
+                dot => {
+
+                    dot.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            testimonials[index].classList.add(
+                "active"
+            );
+
+            dots[index].classList.add(
+                "active"
+            );
+
+            testimonialIndex = index;
+
+        }
+
+
+        setInterval(
+            () => {
+
+                testimonialIndex =
+                    (
+                        testimonialIndex + 1
+                    ) %
+                    testimonials.length;
+
+                showTestimonial(
+                    testimonialIndex
+                );
+
+            },
+            5000
+        );
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        const serviceForm =
+            document.getElementById(
+                "serviceForm"
+            );
+
+        const formNotif =
+            document.getElementById(
+                "formNotif"
+            );
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        serviceForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                if (
+                    !serviceForm.checkValidity()
+                ) {
+
+                    serviceForm.reportValidity();
+
+                    return;
+
+                }
+
+
+                const formData =
+                    new FormData(
+                        serviceForm
+                    );
+
+
+                const data = {
+
+                    name:
+                        formData.get("name"),
+
+                    phone:
+                        formData.get("phone"),
+
+                    address:
+                        formData.get("address"),
+
+                    service:
+                        formData.get("service"),
+
+                    message:
+                        formData.get("message")
+
+                };
+
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "Mengirim...";
+
+                formNotif.textContent =
+                    "Sedang mengirim pesanan...";
+
+
+                try {
+
+                    await fetch(
+                        GS_URL,
+                        {
+                            method: "POST",
+
+                            body:
+                                JSON.stringify(
+                                    data
+                                ),
+
+                            headers: {
+                                "Content-Type":
+                                    "text/plain;charset=utf-8"
+                            }
+                        }
+                    );
+
+
+                    formNotif.textContent =
+                        "Pesanan berhasil dikirim. Membuka WhatsApp...";
+
+
+                    const whatsappMessage =
+                        [
+                            "Halo Admin Tekkel, saya ingin melakukan pemesanan servis.",
+                            "",
+                            "Nama: " +
+                                data.name,
+
+                            "Telepon: " +
+                                data.phone,
+
+                            "Alamat: " +
+                                data.address,
+
+                            "Servis: " +
+                                data.service,
+
+                            "Pesan: " +
+                                data.message
+
+                        ].join("\n");
+
+
+                    const whatsappURL =
+                        "https://wa.me/" +
+                        ADMIN_WA +
+                        "?text=" +
+                        encodeURIComponent(
+                            whatsappMessage
+                        );
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                whatsappURL;
+
+                        },
+                        700
+                    );
+
+
+                    serviceForm.reset();
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+
+                    formNotif.textContent =
+                        "Pesanan belum dapat dikirim. Silakan coba lagi atau hubungi WhatsApp.";
+
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Kirim Pesanan";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           BACK TO TOP
+        ====================================================== */
+
+        const backTop =
+            document.getElementById(
+                "backTop"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (
+                    window.scrollY > 500
+                ) {
+
+                    backTop.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    backTop.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        backTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+    </script>
+
+</body>
+</html>
